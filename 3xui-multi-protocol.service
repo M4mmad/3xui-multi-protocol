@@ -4,7 +4,7 @@ Description=3xui-multi-protocol
 [Service]
 # systemd will run this executable to start the service
 # if /usr/bin/dotnet doesn't work, use `which dotnet` to find correct dotnet executable path
-ExecStart=/etc/3xui-multi-protocol/3xui-multi-protocol.dll
+ExecStart=/usr/bin/dotnet /etc/3xui-multi-protocol/3xui-multi-protocol.dll
 
 # to query logs using journalctl, set a logical name here
 SyslogIdentifier=3xui-multi-protocol
