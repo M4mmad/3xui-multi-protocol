@@ -17,3 +17,17 @@ bash <(curl -Ls https://raw.githubusercontent.com/M4mmad/3xui-multi-protocol/mas
 
 
 ![image](https://github.com/M4mmad/3xui-multi-protocol/assets/61095662/196f9e7e-d248-4aed-940a-2ab8f9a13d95)
+
+
+## Stop
+
+برای توقف اجرای اسکریپت کافیست کد زیر رو وارد کنید.
+
+```bash
+systemctl stop 3xui-multi-protocol
+```
+
+اجرای دوباره :
+```bash
+systemctl start 3xui-multi-protocol
+```
