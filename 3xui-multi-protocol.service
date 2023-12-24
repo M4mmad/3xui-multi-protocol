@@ -12,8 +12,7 @@ SyslogIdentifier=3xui-multi-protocol
 # Use your username to keep things simple.
 # If you pick a different user, make sure dotnet and all permissions are set correctly to run the app
 # To update permissions, use 'chown yourusername -R /srv/HelloWorld' to take ownership of the folder and files,
-#       Use 'chmod +x /etc/3xui-multi-protocol/3xui-multi-protocol.dll
-' to allow execution of the executable file
+#       Use 'chmod +x /etc/3xui-multi-protocol/' to allow execution of the executable file
 User=root
 
 # ensure the service restarts after crashing
