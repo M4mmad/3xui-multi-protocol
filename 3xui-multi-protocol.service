@@ -4,7 +4,7 @@ Description=3xui-multi-protocol
 [Service]
 # systemd will run this executable to start the service
 # if /usr/bin/dotnet doesn't work, use `which dotnet` to find correct dotnet executable path
-ExecStart=/root/3xui-multi-protocol/3xui-multi-protocol/bin/Release/net7.0/3xui-multi-protocol.dll
+ExecStart=/etc/3xui-multi-protocol/3xui-multi-protocol.dll
 
 # to query logs using journalctl, set a logical name here
 SyslogIdentifier=3xui-multi-protocol
@@ -12,7 +12,7 @@ SyslogIdentifier=3xui-multi-protocol
 # Use your username to keep things simple.
 # If you pick a different user, make sure dotnet and all permissions are set correctly to run the app
 # To update permissions, use 'chown yourusername -R /srv/HelloWorld' to take ownership of the folder and files,
-#       Use 'chmod +x /root/3xui-multi-protocol/3xui-multi-protocol/bin/Release/net7.0/3xui-multi-protocol.dll
+#       Use 'chmod +x /etc/3xui-multi-protocol/3xui-multi-protocol.dll
 ' to allow execution of the executable file
 User=root
 
