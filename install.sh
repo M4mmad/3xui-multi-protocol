@@ -13,5 +13,6 @@
   dotnet publish -c Release -o /etc/3xui-multi-protocol
   cd /etc/systemd/system/
   wget https://raw.githubusercontent.com/M4mmad/3xui-multi-protocol/master/3xui-multi-protocol.service
+  systemctl daemon-reload
   systemctl start 3xui-multi-protocol
   
