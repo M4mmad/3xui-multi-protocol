@@ -1,6 +1,5 @@
 #!/bin/bash
-apt install git
-  git clone https://github.com/M4mmad/3xui-multi-protocol.git
+
 if [[ -f /etc/os-release ]]; then
     source /etc/os-release
     release=$ID
@@ -10,6 +9,8 @@ else
 fi  
 
 if [[ "${release}" == "debian" ]]; then
+apt install git
+git clone https://github.com/M4mmad/3xui-multi-protocol.git
   cd 3xui-multi-protocol/3xui-multi-protocol
   wget https://packages.microsoft.com/config/debian/10/packages-microsoft-prod.deb -O packages-microsoft-prod.deb 
   dpkg -i packages-microsoft-prod.deb 
@@ -21,6 +22,8 @@ if [[ "${release}" == "debian" ]]; then
   apt install libc6 
   dotnet publish -c Release -o /etc/3xui-multi-protocol
 elif [[ "${release}" == "centos" ]]; then 
+yum install git
+git clone https://github.com/M4mmad/3xui-multi-protocol.git
   cd 3xui-multi-protocol/3xui-multi-protocol
   sudo rpm -Uvh https://packages.microsoft.com/config/centos/7/packages-microsoft-prod.rpm
   sudo yum install dotnet-sdk-7.0
@@ -28,12 +31,16 @@ elif [[ "${release}" == "centos" ]]; then
   sudo yum install dotnet-runtime-7.0
   dotnet publish -c Release -o /etc/3xui-multi-protocol
 elif [[ "${release}" == "fedora" ]]; then
+dnf install git
+git clone https://github.com/M4mmad/3xui-multi-protocol.git
  cd 3xui-multi-protocol/3xui-multi-protocol
   sudo dnf install dotnet-sdk-7.0
   sudo dnf install aspnetcore-runtime-7.0
   sudo dnf install dotnet-runtime-7.0
   dotnet publish -c Release -o /etc/3xui-multi-protocol
  else
+ apt install git
+git clone https://github.com/M4mmad/3xui-multi-protocol.git
   wget https://dot.net/v1/dotnet-install.sh -O dotnet-install.sh
   chmod +x ./dotnet-install.sh
   ./dotnet-install.sh --channel 7.0
