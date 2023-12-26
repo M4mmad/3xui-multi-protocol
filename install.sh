@@ -4,9 +4,10 @@ apt install git
 if [[ -f /etc/os-release ]]; then
     source /etc/os-release
     release=$ID
-elif [[ -f /usr/lib/os-release ]]; then
+else 
     source /usr/lib/os-release
     release=$ID
+fi  
 
 if [[ "${release}" == "debian" ]]; then
   cd 3xui-multi-protocol/3xui-multi-protocol
@@ -19,24 +20,20 @@ if [[ "${release}" == "debian" ]]; then
   apt-get install -y dotnet-runtime-7.0 
   apt install libc6 
   dotnet publish -c Release -o /etc/3xui-multi-protocol
-  
-   fi
-    elif [[ "${release}" == "centos" ]]; then 
-     cd 3xui-multi-protocol/3xui-multi-protocol
+elif [[ "${release}" == "centos" ]]; then 
+  cd 3xui-multi-protocol/3xui-multi-protocol
   sudo rpm -Uvh https://packages.microsoft.com/config/centos/7/packages-microsoft-prod.rpm
   sudo yum install dotnet-sdk-7.0
   sudo yum install aspnetcore-runtime-7.0
   sudo yum install dotnet-runtime-7.0
   dotnet publish -c Release -o /etc/3xui-multi-protocol
-    fi
-    elif [[ "${release}" == "fedora" ]]; then 
-    cd 3xui-multi-protocol/3xui-multi-protocol
+elif [[ "${release}" == "fedora" ]]; then
+ cd 3xui-multi-protocol/3xui-multi-protocol
   sudo dnf install dotnet-sdk-7.0
   sudo dnf install aspnetcore-runtime-7.0
   sudo dnf install dotnet-runtime-7.0
   dotnet publish -c Release -o /etc/3xui-multi-protocol
-    fi
-else
+ else
   wget https://dot.net/v1/dotnet-install.sh -O dotnet-install.sh
   chmod +x ./dotnet-install.sh
   ./dotnet-install.sh --channel 7.0
