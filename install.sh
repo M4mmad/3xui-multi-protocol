@@ -22,15 +22,16 @@ git clone https://github.com/M4mmad/3xui-multi-protocol.git
   apt install libc6 
   dotnet publish -c Release -o /etc/3xui-multi-protocol
 elif [[ "${release}" == "centos" ]]; then 
-yum install git
+dnf install wget
+dnf install git
 git clone https://github.com/M4mmad/3xui-multi-protocol.git
-  cd 3xui-multi-protocol/3xui-multi-protocol
-  sudo rpm -Uvh https://packages.microsoft.com/config/centos/7/packages-microsoft-prod.rpm
-  sudo yum install dotnet-sdk-7.0
-  sudo yum install aspnetcore-runtime-7.0
-  sudo yum install dotnet-runtime-7.0
+ cd 3xui-multi-protocol/3xui-multi-protocol
+  sudo dnf install dotnet-sdk-7.0
+  sudo dnf install aspnetcore-runtime-7.0
+  sudo dnf install dotnet-runtime-7.0
   dotnet publish -c Release -o /etc/3xui-multi-protocol
 elif [[ "${release}" == "fedora" ]]; then
+dnf install wget
 dnf install git
 git clone https://github.com/M4mmad/3xui-multi-protocol.git
  cd 3xui-multi-protocol/3xui-multi-protocol
