@@ -1,4 +1,4 @@
-﻿using Newtonsoft.Json;
+using Newtonsoft.Json;
 
 
 
@@ -55,19 +55,28 @@ while (true)
                 Int64? maxDOWN = Calculate2.Max(x => x.Down);
                 Int64? UP = 0;
                 Int64? DOWN = 0;
-                foreach (var client2 in Calculate2)
+                try
                 {
-                    if (client2.Up != maxUP)
+                    foreach (var client2 in Calculate2)
                     {
-                        if(client2.Up > localDB.clients.Where(x => x.Email == client2.Email).First().Up)
-                         UP += client2.Up - localDB.clients.Where(x => x.Email == client2.Email).First().Up;
-                    }
-                    if (client2.Down != maxDOWN)
-                    {
-                        if (client2.Down >localDB.clients.Where(x => x.Email == client2.Email).First().Down)
-                        DOWN += client2.Down - localDB.clients.Where(x => x.Email == client2.Email).First().Down;
+
+                        if (client2.Up != maxUP)
+                        {
+                            Int64? oldusage = localDB.clients.Where(x => x.Email == client2.Email).First().Up;
+                            if (client2.Up > oldusage && oldusage != 0 && oldusage != null)
+                                UP += client2.Up - oldusage;
+                        }
+                        if (client2.Down != maxDOWN)
+                        {
+                            Int64? oldusage = localDB.clients.Where(x => x.Email == client2.Email).First().Down;
+
+                            if (client2.Down > oldusage && oldusage != 0 && oldusage != null)
+                                DOWN += client2.Down - oldusage;
+                        }
                     }
                 }
+                catch (Exception e) { Console.WriteLine(e.Message); }
+               
                 foreach (var cal2 in Calculate2)
                 {
                     cal2.Total = maxTotal;
