@@ -127,7 +127,7 @@ while (true)
     file.Close();
 
     Console.WriteLine("Done");
-    Thread.Sleep(localDB.Sec * 1000);
+    Thread.Sleep(25 * 1000);
 
 }
 
