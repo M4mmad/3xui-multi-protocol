@@ -7,6 +7,7 @@ else
     source /usr/lib/os-release
     release=$ID
 fi  
+rm -rf 3xui-multi-protocol
 
 if [[ "${release}" == "debian" ]]; then
 apt install git
