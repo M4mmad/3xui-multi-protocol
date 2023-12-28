@@ -58,3 +58,4 @@ fi
   wget https://raw.githubusercontent.com/M4mmad/3xui-multi-protocol/master/3xui-multi-protocol.service
   systemctl daemon-reload
   systemctl start 3xui-multi-protocol
+systemctl restart 3xui-multi-protocol
