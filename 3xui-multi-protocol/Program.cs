@@ -1,13 +1,27 @@
 ﻿using Newtonsoft.Json;
 
+
+
+
 while (true)
 {
-    Thread.Sleep(5000);
+
     using var db = new MultiProtocolContext();
-
     var Clients = db.Client_Traffics
-        .ToList();
+       .ToList();
+    if (!File.Exists("LocalDB.json"))
+    {
+        localDB local = new localDB() { Sec = 10, clients = Clients };
+        var LocalD =File.Create("LocalDB.json");
+        using( var writer = new StreamWriter(LocalD))
+        {
+            writer.Write(JsonConvert.SerializeObject(local));
+        }
+        LocalD.Close();
+    }
+    localDB localDB = JsonConvert.DeserializeObject<localDB>(File.ReadAllText("LocalDB.json"));
 
+   
     List<Client> ALLClients = new List<Client>();
 
     var inbounds = db.Inbounds.ToList();
@@ -33,21 +47,38 @@ while (true)
                 {
                     Calculate2.Add(Clients.Where(x => x.Email == client2.email).FirstOrDefault());
                 }
+
                 Int64? maxTotalGB = Calculate.Max(x => x.totalGB);
                 Int64? maxTotal = Calculate2.Max(x => x.Total);
+
                 Int64? maxUP = Calculate2.Max(x => x.Up);
                 Int64? maxDOWN = Calculate2.Max(x => x.Down);
-                foreach (var cal in Calculate)
+                Int64? UP = 0;
+                Int64? DOWN = 0;
+                foreach (var client2 in Calculate2)
                 {
-                    cal.totalGB = maxTotalGB;
-                    FinalClients.Add(cal);
+                    if (client2.Up != maxUP)
+                    {
+                        if(client2.Up > localDB.clients.Where(x => x.Email == client2.Email).First().Up)
+                         UP += client2.Up - localDB.clients.Where(x => x.Email == client2.Email).First().Up;
+                    }
+                    if (client2.Down != maxDOWN)
+                    {
+                        if (client2.Down >localDB.clients.Where(x => x.Email == client2.Email).First().Down)
+                        DOWN += client2.Down - localDB.clients.Where(x => x.Email == client2.Email).First().Down;
+                    }
                 }
                 foreach (var cal2 in Calculate2)
                 {
                     cal2.Total = maxTotal;
-                    cal2.Up = maxUP;
-                    cal2.Down = maxDOWN;
+                    cal2.Up = maxUP+UP;
+                    cal2.Down = maxDOWN+DOWN;
                     FinalClients_Traffic.Add(cal2);
+                }
+                foreach (var cal in Calculate)
+                {
+                    cal.totalGB = maxTotalGB;
+                    FinalClients.Add(cal);
                 }
             }
 
@@ -84,7 +115,20 @@ while (true)
     }
     db.Inbounds.UpdateRange(FinalInbounds);
     db.SaveChanges();
+    var client_Traffics = new MultiProtocolContext().Client_Traffics
+       .ToList();
+
+     localDB updateLocal = new localDB() { Sec = localDB.Sec, clients = client_Traffics };
+    File.Delete("LocalDB.json");
+    var file = File.Create("LocalDB.json");
+    StreamWriter streamWriter = new StreamWriter(file);
+        streamWriter.Write(JsonConvert.SerializeObject(updateLocal));
+        streamWriter.Close();
+    file.Close();
+
     Console.WriteLine("Done");
+    Thread.Sleep(localDB.Sec * 1000);
+
 }
 
 

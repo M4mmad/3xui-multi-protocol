@@ -76,3 +76,10 @@ public class inboundsetting
     public string decryption { get; set; }
     public List<object> fallbacks { get; set; }
 }
+
+public class localDB
+{
+    public int Sec { get; set; }
+
+    public List<Client_Traffics> clients { get; set; }
+}
