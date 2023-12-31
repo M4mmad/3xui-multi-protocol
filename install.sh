@@ -41,10 +41,11 @@ git clone https://github.com/M4mmad/3xui-multi-protocol.git
   sudo dnf install dotnet-runtime-7.0
   dotnet publish -c Release -o /etc/3xui-multi-protocol
 elif [[ "${release}" == "ubuntu" ]]; then
+declare repo_version=$(if command -v lsb_release &> /dev/null; then lsb_release -r -s; else grep -oP '(?<=^VERSION_ID=).+' /etc/os-release | tr -d '"'; fi)
 apt install git
 git clone https://github.com/M4mmad/3xui-multi-protocol.git
  cd 3xui-multi-protocol/3xui-multi-protocol
-  wget https://packages.microsoft.com/config/ubuntu/20.04/packages-microsoft-prod.deb -O packages-microsoft-prod.deb
+  wget https://packages.microsoft.com/config/ubuntu/$repo_version/packages-microsoft-prod.deb -O packages-microsoft-prod.deb
  dpkg -i packages-microsoft-prod.deb
 rm packages-microsoft-prod.deb
  apt-get update 
