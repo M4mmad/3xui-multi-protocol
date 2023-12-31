@@ -20,6 +20,7 @@ bash <(curl -Ls https://raw.githubusercontent.com/M4mmad/3xui-multi-protocol/mas
 
 
 ## Stop
+برای کاهش حجم و یا ریست ترافیک کاربر لازم است سرویس را متوقف کنید!
 
 برای توقف اجرای اسکریپت کافیست کد زیر رو وارد کنید.
 
