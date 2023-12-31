@@ -40,6 +40,19 @@ git clone https://github.com/M4mmad/3xui-multi-protocol.git
   sudo dnf install aspnetcore-runtime-7.0
   sudo dnf install dotnet-runtime-7.0
   dotnet publish -c Release -o /etc/3xui-multi-protocol
+elif [[ "${release}" == "ubuntu" ]]; then
+apt install git
+git clone https://github.com/M4mmad/3xui-multi-protocol.git
+ cd 3xui-multi-protocol/3xui-multi-protocol
+  wget https://packages.microsoft.com/config/ubuntu/20.04/packages-microsoft-prod.deb -O packages-microsoft-prod.deb
+ dpkg -i packages-microsoft-prod.deb
+rm packages-microsoft-prod.deb
+ apt-get update 
+   apt-get install -y dotnet-sdk-7.0
+apt-get update
+apt-get install -y aspnetcore-runtime-7.0
+apt-get install -y dotnet-runtime-7.0
+  dotnet publish -c Release -o /etc/3xui-multi-protocol
  else
  apt install git
 git clone https://github.com/M4mmad/3xui-multi-protocol.git
