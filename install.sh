@@ -52,7 +52,9 @@ rm packages-microsoft-prod.deb
 apt-get install -y dotnet-sdk-7.0
 apt-get update
 apt-get install -y aspnetcore-runtime-7.0
+apt-get update
 apt-get install -y dotnet-runtime-7.0
+apt-get update
   dotnet publish -c Release -o /etc/3xui-multi-protocol
  else
  apt install git
