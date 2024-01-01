@@ -35,5 +35,5 @@ systemctl start 3xui-multi-protocol
 
 #حذف
 ```bash
-bash <(curl -Ls https://raw.githubusercontent.com/M4mmad/3xui-multi-protocol/master/Uninstall.sh --ipv4)
+bash <(curl -Ls https://raw.githubusercontent.com/M4mmad/3xui-multi-protocol/master/unistall.sh --ipv4)
 ```
