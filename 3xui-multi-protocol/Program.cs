@@ -99,29 +99,36 @@ while (true)
     db.Client_Traffics.UpdateRange(FinalClients_Traffic);
 
     List<Inbound> FinalInbounds = new List<Inbound>();
-    foreach (var inbound in db.Inbounds)
-    {
-
-        inboundsetting setting = JsonConvert.DeserializeObject<inboundsetting>(inbound.Settings);
-        var clis = FinalClients_Traffic.Where(x => x.Inbound_Id == inbound.Id).ToList();
-        List<Client> addtoInbound = new List<Client>();
-        foreach (var client in clis)
+    try {
+        foreach (var inbound in db.Inbounds)
         {
-            addtoInbound.Add(FinalClients.Where(x => x.email == client.Email).FirstOrDefault());
+            if(inbound.Protocol== "vmess" || inbound.Protocol == "vless")
+            {
+                inboundsetting setting = JsonConvert.DeserializeObject<inboundsetting>(inbound.Settings);
+                var clis = FinalClients_Traffic.Where(x => x.Inbound_Id == inbound.Id).ToList();
+                List<Client> addtoInbound = new List<Client>();
+                foreach (var client in clis)
+                {
+                    addtoInbound.Add(FinalClients.Where(x => x.email == client.Email).FirstOrDefault());
 
-        }
-        if (addtoInbound.Count() > 0)
-        {
+                }
+                if (addtoInbound.Count() > 0)
+                {
 
-            List<Client> pastclients = new List<Client>();
-            foreach (Client client in setting.clients)
-                if (!addtoInbound.Any(x => x.email == client.email)) { pastclients.Add(client); }
-            pastclients.AddRange(addtoInbound);
-            setting.clients = pastclients;
-            inbound.Settings = JsonConvert.SerializeObject(setting);
-            FinalInbounds.Add(inbound);
+                    List<Client> pastclients = new List<Client>();
+                    foreach (Client client in setting.clients)
+                        if (!addtoInbound.Any(x => x.email == client.email)) { pastclients.Add(client); }
+                    pastclients.AddRange(addtoInbound);
+                    setting.clients = pastclients;
+                    inbound.Settings = JsonConvert.SerializeObject(setting);
+                    FinalInbounds.Add(inbound);
+                }
+            }
+            
         }
+
     }
+    catch (Exception e) { Console.WriteLine(e.Message); }
     db.Inbounds.UpdateRange(FinalInbounds);
     db.SaveChanges();
     var client_Traffics = new MultiProtocolContext().Client_Traffics
