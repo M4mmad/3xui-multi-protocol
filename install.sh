@@ -45,15 +45,7 @@ declare repo_version=$(if command -v lsb_release &> /dev/null; then lsb_release 
 apt install git
 git clone https://github.com/M4mmad/3xui-multi-protocol.git
  cd 3xui-multi-protocol/3xui-multi-protocol
-
-if [[ "${repo_version}" == "22.04" ]]; then
-wget https://dot.net/v1/dotnet-install.sh -O dotnet-install.sh
-  chmod +x ./dotnet-install.sh
-  ./dotnet-install.sh --channel 7.0
-  apt update
-  apt install -y dotnet7
-else
-  wget https://packages.microsoft.com/config/ubuntu/$repo_version/packages-microsoft-prod.deb -O packages-microsoft-prod.deb
+ wget https://packages.microsoft.com/config/ubuntu/$repo_version/packages-microsoft-prod.deb -O packages-microsoft-prod.deb
  dpkg -i packages-microsoft-prod.deb
 rm packages-microsoft-prod.deb
  apt-get update 
@@ -62,8 +54,12 @@ apt-get update
 apt-get install -y aspnetcore-runtime-7.0
 apt-get update
 apt-get install -y dotnet-runtime-7.0
-fi
 apt-get update
+if [[ "${repo_version}" == "22.04" ]]; then
+sudo apt-get purge dotnet-sdk-7.0
+sudo rm -f /etc/apt/sources.list.d/microsoft-prod.list && sudo apt update
+sudo apt install -y dotnet7
+fi
   dotnet publish -c Release -o /etc/3xui-multi-protocol
 
  else
