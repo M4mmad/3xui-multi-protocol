@@ -49,7 +49,7 @@ git clone https://github.com/M4mmad/3xui-multi-protocol.git
  dpkg -i packages-microsoft-prod.deb
 rm packages-microsoft-prod.deb
  apt-get update 
-   apt-get install -y dotnet-sdk-7.0
+apt-get install -y dotnet-sdk-7.0
 apt-get update
 apt-get install -y aspnetcore-runtime-7.0
 apt-get install -y dotnet-runtime-7.0
@@ -70,6 +70,8 @@ fi
  
   cd /etc/systemd/system/
   wget https://raw.githubusercontent.com/M4mmad/3xui-multi-protocol/master/3xui-multi-protocol.service
+   cp /etc/x-ui/x-ui.db /etc/x-ui/backup.db
   systemctl daemon-reload
   systemctl start 3xui-multi-protocol
+systemctl enable 3xui-multi-protocol
 systemctl restart 3xui-multi-protocol
