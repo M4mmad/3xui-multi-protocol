@@ -1,4 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 
 public class MultiProtocolContext : DbContext
 {
@@ -10,6 +10,7 @@ public class MultiProtocolContext : DbContext
     public MultiProtocolContext()
     {
         var folder = "/etc/x-ui/";
+     
         DbPath = System.IO.Path.Join(folder, "x-ui.db");
     }
 
@@ -58,15 +59,16 @@ public class Client_Traffics
 
 public class Client
 {
-    public string? id { get; set; }
-    public string? subId { get; set; }
     public string? email { get; set; }
-    public string? tgId { get; set; }
-    public string? flow { get; set; }
-    public Int64? totalGB { get; set; }
     public bool? enable { get; set; }
     public Int64? expiryTime { get; set; }
+    public string? flow { get; set; }
+    public string? id { get; set; }
     public int? limitIp { get; set; }
+    public bool? reset { get; set; }
+    public string? subId { get; set; }
+    public string? tgId { get; set; }
+    public Int64? totalGB { get; set; }
 
 }
 
