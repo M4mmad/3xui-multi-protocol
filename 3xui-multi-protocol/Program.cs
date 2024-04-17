@@ -61,7 +61,7 @@ while (true)
                 Int64? ExpireTime=0;
                 if (DateMax > 0)
                 {
-                    ExpireTime = DateMax;
+                    ExpireTime = Calculate2.Where(x=>x.Expiry_Time>0).ToList().Min(x=>x.Expiry_Time);
                 }else if(DateMin<0)
                     ExpireTime=DateMin;
 
