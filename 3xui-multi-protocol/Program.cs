@@ -99,8 +99,6 @@ while (true)
                     cal2.Up = maxUP+UP;
                     cal2.Down = maxDOWN+DOWN;
                     cal2.Expiry_Time = ExpireTime;
-                    if(check)
-                        cal2.Enable = true;
                     FinalClients_Traffic.Add(cal2);
 
                 }
