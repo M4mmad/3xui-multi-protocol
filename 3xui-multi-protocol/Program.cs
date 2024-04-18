@@ -62,10 +62,9 @@ while (true)
                 if (DateMax > 0)
                 {
                     ExpireTime = DateMax;
-                }else if(DateMin<0)
-                    ExpireTime=DateMin;
-
-
+                }
+                else if (DateMin < 0)
+                    ExpireTime = DateMin;
                 try
                 {
                     foreach (var client2 in Calculate2)
@@ -87,14 +86,23 @@ while (true)
                     }
                 }
                 catch (Exception e) { Console.WriteLine(e.Message); }
-               
+
+                bool check = false;
+                if (Calculate2.Where(x => x.Enable == true).Count() == 1)
+                {
+                    check = true;
+                }
+
                 foreach (var cal2 in Calculate2)
                 {
                     cal2.Total = maxTotal;
                     cal2.Up = maxUP+UP;
                     cal2.Down = maxDOWN+DOWN;
                     cal2.Expiry_Time = ExpireTime;
+                    if(check)
+                        cal2.Enable = true;
                     FinalClients_Traffic.Add(cal2);
+
                 }
                 foreach (var cal in Calculate)
                 {
