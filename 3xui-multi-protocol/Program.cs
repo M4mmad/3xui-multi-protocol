@@ -65,10 +65,6 @@ while (true)
                 }else if(DateMin<0)
                     ExpireTime=DateMin;
 
-                if(DateMax>0 && DateMin > 0)
-                {
-                    ExpireTime = DateMin;
-                }
 
                 try
                 {
